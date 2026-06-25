@@ -1,48 +1,45 @@
 # Engineering Research Skills
 
-A test repository for LLM-ready research and engineering skills.
+LLM skill files for AI/ML research and engineering workflows.
 
-This project packages my common research, engineering, coding, and reporting preferences into reusable skill instructions for large language models (LLMs). It is mainly designed for AI-assisted workflows in deep learning research, computer vision engineering, model debugging, experiment logging, paper review, and edge AI deployment.
+This repository packages personal workflow habits into reusable skill instructions for large language models. Designed for deep learning research, computer vision engineering, model debugging, experiment design, paper review, and edge AI deployment.
 
-這專案是將我個人的經驗與習慣打包，屬於測試版本，如有不圓滿的地方再請多包涵。
+> 這是個人工作流程習慣的測試版本，仍在持續迭代改進。如有不完善之處，請多多包容。
 
-> This is an experimental skill repository. The current version reflects my personal workflow habits and still has limitations. It will be improved iteratively.
+---
 
-> 目前版本反映了我個人的工作流程習慣，但仍存在一些限制，將持續迭代改進。
-
-## Usage
-
-Clone this repository:
+## Quick Start
 
 ```bash
 git clone https://github.com/mcodare709/Engineering-research-skills.git
 ```
 
-Use the skill file:
+Load the skill into your LLM environment:
 
 ```text
 skills/engineering-research/SKILL.md
 ```
 
-Copy the content of `SKILL.md` into an LLM system prompt, custom instruction, agent skill file, or coding assistant configuration.
+Copy the content of `SKILL.md` into a system prompt, custom instruction, agent skill file, or coding assistant configuration.
+
+---
 
 ## Skills
 
-### engineering-research
+### `engineering-research`
 
-A technical research assistant skill for LLMs working on:
+A concise technical assistant skill covering:
 
-* Deep learning model training, inference, debugging, and architecture modification
-* PyTorch / OpenCV / NAFNet / Transformer / U-shape / FFT / Wavelet
-* Image enhancement, industrial defect detection, classification, and anomaly detection
-* Experiment logging, daily reports, weekly reports, and progress summaries
-* Paper review, method comparison, research writing, and IEEE-style experiment design
-* Git, CUDA, conda, checkpoint management, Windows / PowerShell / Linux workflows
-* Edge AI deployment, Jetson Orin Nano, and real-time inference
+- Deep learning: model training, debugging, architecture modification, inference
+- Frameworks: PyTorch, OpenCV, YOLO, NAFNet, Transformer, U-shape, FFT, Wavelet
+- Tasks: image enhancement, defect detection, anomaly detection, classification
+- Research: paper review, experiment design, method comparison, IEEE-style reporting
+- Deployment: edge AI, Jetson Orin Nano, TensorRT, ONNX, real-time inference
+- Tooling: Git, CUDA, conda, checkpoint management, Windows / PowerShell / Linux
 
-## Target Use Cases
+**Default language**: Traditional Chinese, with English preserved for all technical terms.
 
-The scenarios listed above represent common research and engineering workflows supported by this skill.
+---
 
 ## Repository Structure
 
@@ -50,10 +47,30 @@ The scenarios listed above represent common research and engineering workflows s
 Engineering-research-skills/
 ├── README.md
 ├── LICENSE
+├── pit
 └── skills/
+    ├── engineering-research.zip/
     └── engineering-research/
-        └── SKILL.md
+        ├── SKILL.md
+        └── references/
+            ├── training.md
+            ├── deployment.md
+            ├── defect-detection.md
+            ├── research.md
+            ├── debug.md
+            └── code-rules.md
 ```
+
+`SKILL.md` is the main entry point. The `references/` files are loaded on demand — the LLM reads only the file relevant to the current task.
+
+---
+
+## Test Gemini, ChatGPT, Claude
+<div align="center">
+  <img src="pit/1.png" width="28%" />
+  <img src="pit/2.png" width="30%" />
+  <img src="pit/3.png" width="31%" />
+</div>
 
 ## License
 
