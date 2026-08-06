@@ -1,24 +1,26 @@
 # Changelog
 
-All notable changes to this project are documented here.
-
-## [1.1.0] - 2026-08-06
+## [1.2.0] - 2026-08-06
 
 ### Added
 
-- Automated skill validation and packaging scripts.
-- GitHub Actions validation workflow.
-- Trigger and output evaluation cases.
-- Reporting reference for daily, weekly and experiment summaries.
-- Frontmatter metadata, compatibility scope and explicit task routing.
+- One cross-client installer for Codex, Claude Code, Antigravity IDE, and Cursor.
+- Self-contained web prompt.
+- Systematic context-compaction protocol.
+- Public bundle build containing local skill and web version.
+- English-only and no-image validation.
 
 ### Changed
 
-- Renamed the main entry file from `skill.md` to `SKILL.md`.
-- Narrowed the activation description to reduce false triggering.
-- Replaced product-specific code artifact rules with capability-neutral behavior.
-- Moved screenshots from `pit/` to `docs/images/`.
+- Rewrote all skill content in concise English.
+- Adapted output rules from the Caveman skill: terse, exact, no filler.
+- Reduced platform-specific wording and kept one canonical Agent Skill source.
 
 ### Removed
 
-- Committed `skills/engineering-research.zip`; packages are now generated from source.
+- `docs/images/` and all screenshot documentation.
+
+## [1.1.0] - 2026-08-06
+
+- Added validation, packaging, evals, and domain references.
+- Renamed `skill.md` to `SKILL.md`.

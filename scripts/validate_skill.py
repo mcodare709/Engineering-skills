@@ -1,149 +1,184 @@
 from __future__ import annotations
 
 import re
-import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SKILL = ROOT / "skills" / "engineering-research"
+SKILL_DIR = ROOT / "skills" / "engineering-research"
+SKILL_FILE = SKILL_DIR / "SKILL.md"
+WEB_FILE = ROOT / "web" / "engineering-research.md"
 NAME_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 LINK_PATTERN = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
+CJK_PATTERN = re.compile(r"[\u3400-\u9fff]")
+TEXT_SUFFIXES = {".md", ".yaml", ".yml", ".py", ".txt", ".toml"}
+REQUIRED_REFERENCES = {
+    "context-engineering.md",
+    "training.md",
+    "debug.md",
+    "deployment.md",
+    "defect-detection.md",
+    "research.md",
+    "reporting.md",
+    "code-rules.md",
+}
 
 
-def parse_frontmatter(text: str) -> tuple[dict[str, str], str]:
+def frontmatter(text: str) -> tuple[dict[str, str], str]:
     lines = text.splitlines()
-    if not lines or lines[0].strip() != "---":
-        raise ValueError("SKILL.md must start with YAML frontmatter")
-
+    if not lines or lines[0] != "---":
+        raise ValueError("SKILL.md must start with YAML frontmatter.")
     try:
-        end = lines[1:].index("---") + 1
+        end = lines.index("---", 1)
     except ValueError as exc:
-        raise ValueError("SKILL.md frontmatter is not closed") from exc
+        raise ValueError("SKILL.md frontmatter is not closed.") from exc
 
     data: dict[str, str] = {}
-    current_key: str | None = None
+    key: str | None = None
     folded: list[str] = []
 
     def flush() -> None:
-        nonlocal current_key, folded
-        if current_key is not None and folded:
-            data[current_key] = " ".join(part.strip() for part in folded).strip()
-        current_key = None
+        nonlocal key, folded
+        if key and folded:
+            data[key] = " ".join(line.strip() for line in folded)
+        key = None
         folded = []
 
-    for raw in lines[1:end]:
-        if not raw.strip() or raw.lstrip().startswith("#"):
-            continue
-        if raw.startswith("  "):
-            if current_key is not None:
-                folded.append(raw)
+    for line in lines[1:end]:
+        if line.startswith("  ") and key:
+            folded.append(line)
             continue
         flush()
-        if ":" not in raw:
+        if ":" not in line:
             continue
-        key, value = raw.split(":", 1)
-        key = key.strip()
+        current, value = line.split(":", 1)
+        current = current.strip()
         value = value.strip()
         if value in {">", "|"}:
-            current_key = key
-            continue
-        if value:
-            data[key] = value.strip('"\'')
+            key = current
+        elif value:
+            data[current] = value.strip("\"'")
     flush()
     return data, "\n".join(lines[end + 1 :])
 
 
-def validate(skill_dir: Path) -> list[str]:
+def validate_links(body: str) -> list[str]:
     errors: list[str] = []
-    skill_file = skill_dir / "SKILL.md"
+    for link in LINK_PATTERN.findall(body):
+        if link.startswith(("http://", "https://", "#")):
+            continue
+        target = (SKILL_DIR / link.split("#", 1)[0]).resolve()
+        try:
+            target.relative_to(SKILL_DIR.resolve())
+        except ValueError:
+            errors.append(f"Link escapes skill directory: {link}")
+            continue
+        if not target.exists():
+            errors.append(f"Broken link: {link}")
+    return errors
 
-    if not skill_file.is_file():
-        return [f"Missing required file: {skill_file.relative_to(ROOT)}"]
-    if (skill_dir / "skill.md").exists():
-        errors.append("Lowercase skill.md must not coexist with SKILL.md")
+
+def validate_english() -> list[str]:
+    errors: list[str] = []
+    roots = [
+        ROOT / "README.md",
+        ROOT / "CHANGELOG.md",
+        ROOT / "skills",
+        ROOT / "web",
+        ROOT / "evals",
+        ROOT / "scripts",
+        ROOT / ".github",
+    ]
+    paths: list[Path] = []
+    for item in roots:
+        if item.is_file():
+            paths.append(item)
+        elif item.exists():
+            paths.extend(path for path in item.rglob("*") if path.is_file())
+
+    for path in paths:
+        if path.suffix.lower() not in TEXT_SUFFIXES:
+            continue
+        text = path.read_text(encoding="utf-8")
+        if CJK_PATTERN.search(text):
+            errors.append(f"Non-English CJK text found: {path.relative_to(ROOT)}")
+    return errors
+
+
+def validate() -> list[str]:
+    errors: list[str] = []
+
+    if not SKILL_FILE.is_file():
+        return ["Missing skills/engineering-research/SKILL.md"]
+    if (SKILL_DIR / "skill.md").exists():
+        errors.append("Lowercase skill.md must not exist.")
 
     try:
-        metadata, body = parse_frontmatter(skill_file.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, ValueError) as exc:
+        metadata, body = frontmatter(SKILL_FILE.read_text(encoding="utf-8"))
+    except ValueError as exc:
         return [str(exc)]
 
-    for key in ("name", "description"):
-        if not metadata.get(key):
-            errors.append(f"Missing frontmatter field: {key}")
+    for field in ("name", "description"):
+        if not metadata.get(field):
+            errors.append(f"Missing frontmatter field: {field}")
 
     name = metadata.get("name", "")
     if name and not NAME_PATTERN.fullmatch(name):
-        errors.append("name must use lowercase kebab-case")
-    if name and skill_dir.name != name:
-        errors.append(f"Directory name '{skill_dir.name}' must match skill name '{name}'")
-
-    description = metadata.get("description", "")
-    if len(description) > 1024:
-        errors.append(f"description exceeds 1024 characters: {len(description)}")
-
+        errors.append("Skill name must use lowercase kebab-case.")
+    if name and name != SKILL_DIR.name:
+        errors.append("Skill directory must match frontmatter name.")
+    if len(metadata.get("description", "")) > 1024:
+        errors.append("Description exceeds 1024 characters.")
     if not body.strip():
-        errors.append("SKILL.md body is empty")
+        errors.append("SKILL.md body is empty.")
 
-    for target in LINK_PATTERN.findall(body):
-        if target.startswith(("http://", "https://", "#")):
-            continue
-        clean_target = target.split("#", 1)[0]
-        resolved = (skill_dir / clean_target).resolve()
-        try:
-            resolved.relative_to(skill_dir.resolve())
-        except ValueError:
-            errors.append(f"Link escapes skill directory: {target}")
-            continue
-        if not resolved.exists():
-            errors.append(f"Broken relative link: {target}")
+    errors.extend(validate_links(body))
 
-    references = skill_dir / "references"
-    if not references.is_dir():
-        errors.append("Missing references directory")
-    else:
-        for path in sorted(references.glob("*.md")):
-            if not path.read_text(encoding="utf-8").strip():
-                errors.append(f"Empty reference file: {path.relative_to(ROOT)}")
+    references = SKILL_DIR / "references"
+    present = {path.name for path in references.glob("*.md")} if references.exists() else set()
+    for missing in sorted(REQUIRED_REFERENCES - present):
+        errors.append(f"Missing reference: {missing}")
 
-    required_references = {
-        "training.md",
-        "debug.md",
-        "deployment.md",
-        "defect-detection.md",
-        "research.md",
-        "reporting.md",
-        "code-rules.md",
-    }
-    existing = {path.name for path in references.glob("*.md")} if references.exists() else set()
-    for missing in sorted(required_references - existing):
-        errors.append(f"Missing reference file: references/{missing}")
+    if not WEB_FILE.is_file() or not WEB_FILE.read_text(encoding="utf-8").strip():
+        errors.append("Missing web/engineering-research.md")
+
+    for required in (ROOT / "evals" / "trigger-cases.yaml", ROOT / "evals" / "output-cases.yaml"):
+        if not required.is_file() or not required.read_text(encoding="utf-8").strip():
+            errors.append(f"Missing eval file: {required.relative_to(ROOT)}")
+
+    if (ROOT / "docs" / "images").exists() or (ROOT / "pit").exists():
+        errors.append("Image documentation directories must not exist.")
+
+    image_suffixes = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".svg"}
+    for path in ROOT.rglob("*"):
+        if path.is_file() and path.suffix.lower() in image_suffixes:
+            errors.append(f"Image file not allowed: {path.relative_to(ROOT)}")
 
     if any((ROOT / "skills").glob("*.zip")):
-        errors.append("Do not commit generated ZIP files under skills/; run package_skill.py")
+        errors.append("Generated ZIP must not be committed under skills/.")
 
-    for eval_file in (ROOT / "evals" / "trigger-cases.yaml", ROOT / "evals" / "output-cases.yaml"):
-        if not eval_file.is_file() or not eval_file.read_text(encoding="utf-8").strip():
-            errors.append(f"Missing or empty eval file: {eval_file.relative_to(ROOT)}")
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    for token in (
+        ".agents/skills/engineering-research/",
+        ".claude/skills/engineering-research/",
+        ".cursor/skills/engineering-research/",
+        ".gemini/config/skills/engineering-research/",
+        "web/engineering-research.md",
+    ):
+        if token not in readme:
+            errors.append(f"README missing install target: {token}")
 
-    readme = ROOT / "README.md"
-    if readme.is_file():
-        readme_text = readme.read_text(encoding="utf-8")
-        if "skills/engineering-research/SKILL.md" not in readme_text:
-            errors.append("README must reference the exact SKILL.md path")
-
+    errors.extend(validate_english())
     return errors
 
 
 def main() -> int:
-    skill_dir = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else DEFAULT_SKILL
-    errors = validate(skill_dir)
+    errors = validate()
     if errors:
-        print("Skill validation failed:")
+        print("Validation failed:")
         for error in errors:
             print(f"- {error}")
         return 1
-
-    print(f"Skill validation passed: {skill_dir.relative_to(ROOT)}")
+    print("Validation passed.")
     return 0
 
 

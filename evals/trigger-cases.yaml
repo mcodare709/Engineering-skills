@@ -1,30 +1,19 @@
 version: 1
 skill: engineering-research
 cases:
-  - prompt: "train loss 持續下降，但 validation loss 開始上升，該怎麼判斷？"
+  - prompt: "Training loss falls while validation loss rises. Diagnose it."
     expected: trigger
-    reason: model training diagnosis
-  - prompt: "PyTorch 出現 Expected all tensors to be on the same device"
+  - prompt: "PyTorch says Expected all tensors to be on the same device."
     expected: trigger
-    reason: ML framework debugging
-  - prompt: "幫我設計 PatchCore 工業瑕疵檢測的 ablation study"
+  - prompt: "Design a PatchCore ablation for a factory inspection line."
     expected: trigger
-    reason: research and industrial inspection design
-  - prompt: "Jetson 上 TensorRT 推論只有 8 FPS，怎麼找 bottleneck？"
+  - prompt: "TensorRT on Jetson reaches only 8 FPS."
     expected: trigger
-    reason: edge deployment optimization
-  - prompt: "幫我把今天的 ORB 與 RANSAC 工作整理成三點日報"
+  - prompt: "This session is long. Compact the context and continue."
     expected: trigger
-    reason: technical reporting in engineering context
-  - prompt: "幫我 git push 到 GitHub"
+  - prompt: "Push this repository to GitHub."
     expected: no_trigger
-    reason: routine Git operation
-  - prompt: "Python list 要怎麼排序？"
+  - prompt: "How do I sort a Python list?"
     expected: no_trigger
-    reason: general programming question
-  - prompt: "幫我寫一封請假 email"
+  - prompt: "Write a vacation email."
     expected: no_trigger
-    reason: generic writing task
-  - prompt: "Windows 怎麼新增使用者？"
-    expected: no_trigger
-    reason: non-ML environment setup

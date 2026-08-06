@@ -1,34 +1,87 @@
-# Engineering Research Skills
+# Engineering Research Skill
 
-Reusable Agent Skills instructions for graduate-level AI/ML research and engineering workflows.
+Portable Agent Skill for AI/ML research and engineering.
 
-本 repository 將深度學習研究、computer vision、model debugging、experiment design、industrial defect detection、technical reporting 與 edge deployment 的工作流程整理成可重用 skill。
+One canonical skill. Same content for Codex, Claude Code, Antigravity IDE, and Cursor. A self-contained web prompt is included for browser-based assistants.
 
 ## Scope
 
-`engineering-research` 適合需要研究級分析或工程判斷的任務：
+Use for:
 
-- PyTorch / OpenCV model training and debugging
-- Image enhancement, classification, anomaly detection, defect detection
-- Paper review, novelty analysis, experiment design, ablation planning
-- ONNX / TensorRT / Jetson inference optimization
-- Daily report, weekly report and experiment result writing
+- Model training and debugging
+- Computer vision and image enhancement
+- Industrial defect and anomaly detection
+- Experiment design, paper review, and ablation planning
+- ONNX, TensorRT, Jetson, latency, and production inference
+- Technical reports and experiment records
+- Long-session context compaction
 
-它不應攔截一般程式設計、單純 Git 操作、一般文案或非 ML environment setup。
+Do not use for generic programming, routine Git commands, or unrelated writing.
 
-## Quick Start
+## Install
+
+Clone or download this repository:
 
 ```bash
 git clone https://github.com/mcodare709/Engineering-research-skills.git
+cd Engineering-research-skills
 ```
 
-主要入口：
+Run the cross-platform installer:
+
+```bash
+python scripts/install_skill.py --client codex --scope user
+python scripts/install_skill.py --client claude --scope user
+python scripts/install_skill.py --client antigravity --scope user
+python scripts/install_skill.py --client cursor --scope user
+```
+
+Install for every supported local client:
+
+```bash
+python scripts/install_skill.py --client all --scope user
+```
+
+Project-scoped install:
+
+```bash
+python scripts/install_skill.py --client all --scope project --project-root .
+```
+
+Use `--force` to replace an existing installation.
+
+## Install Locations
+
+| Client | Project | User |
+|---|---|---|
+| Codex | `.agents/skills/engineering-research/` | `~/.agents/skills/engineering-research/` |
+| Claude Code | `.claude/skills/engineering-research/` | `~/.claude/skills/engineering-research/` |
+| Antigravity IDE | `.agents/skills/engineering-research/` | `~/.gemini/config/skills/engineering-research/` |
+| Cursor | `.cursor/skills/engineering-research/` | `~/.cursor/skills/engineering-research/` |
+
+Codex and Antigravity share the project-level `.agents/skills/` path.
+
+## Web Version
+
+Open [`web/engineering-research.md`](web/engineering-research.md). Copy the full file into a system prompt, project instruction, custom instruction, or persistent chat instruction.
+
+The web version is self-contained. It does not require reference-file loading.
+
+## Build Downloads
+
+```bash
+python scripts/build.py
+```
+
+Outputs:
 
 ```text
-skills/engineering-research/SKILL.md
+dist/engineering-research-skill.zip
+dist/engineering-research-web.md
+dist/engineering-research-public.zip
 ```
 
-將完整的 `skills/engineering-research/` 目錄複製到支援 Agent Skills 的 client。若 client 不支援 reference file 載入，可將 `SKILL.md` 與所需的 `references/*.md` 合併至 system prompt 或 custom instruction。
+`engineering-research-public.zip` contains both local Agent Skill and web prompt.
 
 ## Validate
 
@@ -36,69 +89,37 @@ skills/engineering-research/SKILL.md
 python scripts/validate_skill.py
 ```
 
-Validator 會檢查 `SKILL.md`、frontmatter、relative links、reference files、eval cases 與禁止提交的手動 ZIP。
+Validation checks:
 
-## Package
+- Exact `SKILL.md` casing
+- Required frontmatter and references
+- Broken relative links
+- English-only repository content
+- No image documentation
+- Web prompt presence
+- Eval presence
+- No committed generated ZIP
 
-```bash
-python scripts/package_skill.py
-```
-
-輸出：
-
-```text
-dist/engineering-research.zip
-```
-
-ZIP 由 source directory 自動產生，避免 source 與壓縮檔版本不同步。
-
-## Repository Structure
+## Structure
 
 ```text
-Engineering-research-skills/
-├── .github/workflows/validate.yml
+.
+├── README.md
 ├── CHANGELOG.md
 ├── LICENSE
-├── README.md
-├── docs/images/
 ├── evals/
-│   ├── output-cases.yaml
-│   └── trigger-cases.yaml
 ├── scripts/
-│   ├── package_skill.py
+│   ├── build.py
+│   ├── install_skill.py
 │   └── validate_skill.py
-└── skills/
-    └── engineering-research/
-        ├── SKILL.md
-        └── references/
-            ├── code-rules.md
-            ├── debug.md
-            ├── defect-detection.md
-            ├── deployment.md
-            ├── reporting.md
-            ├── research.md
-            └── training.md
+├── skills/
+│   └── engineering-research/
+│       ├── SKILL.md
+│       └── references/
+└── web/
+    └── engineering-research.md
 ```
-
-## Compatibility
-
-| Client type | Installation | Status |
-|---|---|---|
-| Agent Skills-compatible client | Copy skill directory | Primary target |
-| ChatGPT / custom GPT instruction | Upload or paste relevant files | Manual integration |
-| Claude-compatible client | Copy skill directory | Expected compatible |
-| Gemini custom instruction | Paste selected instructions | Experimental |
-
-Compatibility depends on whether the client supports automatic reference-file loading and tool access.
-
-## Screenshots
-
-<div align="center">
-  <img src="docs/images/1.png" width="28%" alt="Skill test screenshot 1" />
-  <img src="docs/images/2.png" width="30%" alt="Skill test screenshot 2" />
-  <img src="docs/images/3.png" width="31%" alt="Skill test screenshot 3" />
-</div>
 
 ## License
 
-MIT License.
+MIT.

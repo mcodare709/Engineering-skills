@@ -1,37 +1,35 @@
-# Technical Reporting Reference
+# Reporting
 
 ## Daily Report
 
-Use 2–4 concise narrative bullets. Each bullet should contain:
+Use 2 to 4 narrative bullets. Each bullet:
 
 ```text
-Action performed → technical method → result or current status
+Action. Method. Result or current state.
 ```
 
-Avoid empty statements such as「持續研究」or「進行測試」without method or result.
+No empty phrases such as "continued research" without method or result.
 
-## Weekly / Progress Report
+## Progress Report
 
-Recommended structure:
-
-1. Objective and scope
-2. Work completed
-3. Quantitative result or observed behavior
-4. Current blocker and root cause
-5. Next experiment or engineering action
+1. Objective
+2. Completed work
+3. Quantitative result
+4. Blocker and cause
+5. Next experiment
 
 ## Experiment Record
 
 ```text
-Experiment ID / date:
+Experiment ID:
 Hypothesis:
 Git commit:
-Dataset and split version:
+Dataset and split:
 Configuration:
-Hardware/software:
+Hardware and software:
 Evaluation command:
-Primary metrics:
-Key observations:
+Metrics:
+Observations:
 Failure cases:
 Decision:
 Next action:
@@ -39,24 +37,4 @@ Next action:
 
 ## Result Paragraph
 
-A research result paragraph should state:
-
-1. Which method/dataset/setting is compared.
-2. The important metric difference with exact values.
-3. The plausible mechanism supported by evidence.
-4. The limitation or condition under which the conclusion holds.
-
-Do not claim causality from one aggregate metric without ablation or controlled comparison.
-
-## Failure Report
-
-```text
-Observed symptom:
-Expected behavior:
-Reproduction condition:
-Most likely root cause:
-Evidence:
-Temporary workaround:
-Permanent fix:
-Validation status:
-```
+State comparison, exact metric difference, evidence-backed mechanism, and validity limit. Do not claim causality from one aggregate metric.

@@ -1,4 +1,4 @@
-name: Validate skill
+name: Validate and build
 
 on:
   push:
@@ -17,9 +17,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Validate source
+      - name: Validate
         run: python scripts/validate_skill.py
-      - name: Build package
-        run: python scripts/package_skill.py
-      - name: Inspect package
-        run: python -m zipfile -l dist/engineering-research.zip
+      - name: Build downloads
+        run: python scripts/build.py
+      - name: Inspect skill archive
+        run: python -m zipfile -l dist/engineering-research-skill.zip
+      - name: Upload downloads
+        uses: actions/upload-artifact@v4
+        with:
+          name: engineering-research-downloads
+          path: dist/
