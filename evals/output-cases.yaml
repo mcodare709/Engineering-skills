@@ -1,0 +1,37 @@
+version: 1
+skill: study-work
+cases:
+  - id: device-mismatch
+    prompt: "Model is on CUDA. Input is on CPU."
+    required:
+      - root cause first
+      - minimal fix
+      - exact technical names
+      - verification
+  - id: production-false-positive
+    prompt: "Lab results are good. Production false positives are high."
+    required:
+      - lighting and reflection
+      - threshold calibration
+      - part-level metrics
+      - stress test
+  - id: research-proposal
+    prompt: "Propose an image enhancement research direction."
+    required:
+      - testable hypothesis
+      - baselines
+      - ablations
+      - metrics
+      - reviewer concerns
+  - id: context-compaction
+    prompt: "Context contains many files, commands, decisions, and repeated constraints."
+    required:
+      - goal
+      - constraints
+      - decisions
+      - evidence
+      - files and symbols
+      - commands and results
+      - current state
+      - open risks
+      - next action

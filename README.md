@@ -1,77 +1,107 @@
-# Engineering Research Skills
+# Study Work Skill
 
-LLM skill files for AI/ML research and engineering workflows.
+Portable Agent Skill for AI/ML research and engineering.
 
-This repository packages personal workflow habits into reusable skill instructions for large language models. Designed for deep learning research, computer vision engineering, model debugging, experiment design, paper review, and edge AI deployment.
+One canonical skill for Codex, Claude Code, Antigravity IDE, and Cursor. A self-contained web prompt is included for browser assistants.
 
-> 這是個人工作流程習慣的測試版本，仍在持續迭代改進。如有不完善之處，請多多包容。
+## Invoke in Codex
 
----
+Type `$`, then select `study-work`.
 
-## Quick Start
+Direct invocation:
+
+```text
+$study-work <task>
+```
+
+Example:
+
+```text
+$study-work diagnose why training loss falls while validation loss rises
+```
+
+## Scope
+
+Use for:
+
+- Model training and debugging
+- Computer vision and image enhancement
+- Industrial defect and anomaly detection
+- Experiment design, paper review, and ablation planning
+- ONNX, TensorRT, Jetson, latency, and production inference
+- Technical reports and experiment records
+- Long-session context compaction
+
+Do not use for generic programming, routine Git commands, or unrelated writing.
+
+## Install
 
 ```bash
 git clone https://github.com/mcodare709/Engineering-research-skills.git
+cd Engineering-research-skills
+python scripts/install_skill.py --client all --scope user
 ```
 
-Load the skill into your LLM environment:
+Project-scoped install:
 
-```text
-skills/engineering-research/SKILL.md
+```bash
+python scripts/install_skill.py --client all --scope project --project-root .
 ```
 
-Copy the content of `SKILL.md` into a system prompt, custom instruction, agent skill file, or coding assistant configuration.
+Use `--force` to replace an existing installation.
 
----
+## Install Locations
 
-## Skills
+| Client | Project | User |
+|---|---|---|
+| Codex | `.agents/skills/study-work/` | `~/.agents/skills/study-work/` |
+| Claude Code | `.claude/skills/study-work/` | `~/.claude/skills/study-work/` |
+| Antigravity IDE | `.agents/skills/study-work/` | `~/.gemini/config/skills/study-work/` |
+| Cursor | `.cursor/skills/study-work/` | `~/.cursor/skills/study-work/` |
 
-### `engineering-research`
+Codex and Antigravity share the project-level `.agents/skills/` path.
 
-A concise technical assistant skill covering:
+## Web Version
 
-- Deep learning: model training, debugging, architecture modification, inference
-- Frameworks: PyTorch, OpenCV, YOLO, NAFNet, Transformer, U-shape, FFT, Wavelet
-- Tasks: image enhancement, defect detection, anomaly detection, classification
-- Research: paper review, experiment design, method comparison, IEEE-style reporting
-- Deployment: edge AI, Jetson Orin Nano, TensorRT, ONNX, real-time inference
-- Tooling: Git, CUDA, conda, checkpoint management, Windows / PowerShell / Linux
+Open [`web/study-work.md`](web/study-work.md). Copy the full file into system instructions, project instructions, or custom instructions.
 
-**Default language**: Traditional Chinese, with English preserved for all technical terms.
+## Build Downloads
 
----
+```bash
+python scripts/build.py
+```
 
-## Repository Structure
+Outputs:
 
 ```text
-Engineering-research-skills/
+dist/study-work-skill.zip
+dist/study-work-web.md
+dist/study-work-public.zip
+```
+
+## Validate
+
+```bash
+python scripts/validate_skill.py
+```
+
+## Structure
+
+```text
+.
 ├── README.md
+├── CHANGELOG.md
 ├── LICENSE
-├── pit
-└── skills/
-    ├── engineering-research.zip/
-    └── engineering-research/
-        ├── SKILL.md
-        └── references/
-            ├── training.md
-            ├── deployment.md
-            ├── defect-detection.md
-            ├── research.md
-            ├── debug.md
-            └── code-rules.md
+├── evals/
+├── scripts/
+├── skills/
+│   └── study-work/
+│       ├── SKILL.md
+│       └── references/
+└── web/
+    └── study-work.md
 ```
-
-`SKILL.md` is the main entry point. The `references/` files are loaded on demand — the LLM reads only the file relevant to the current task.
-
----
-
-## Test Gemini, ChatGPT, Claude
-<div align="center">
-  <img src="pit/1.png" width="28%" />
-  <img src="pit/2.png" width="30%" />
-  <img src="pit/3.png" width="31%" />
-</div>
 
 ## License
 
-MIT License.
+MIT.

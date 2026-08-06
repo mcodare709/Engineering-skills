@@ -1,0 +1,19 @@
+version: 1
+skill: study-work
+cases:
+  - prompt: "Training loss falls while validation loss rises. Diagnose it."
+    expected: trigger
+  - prompt: "PyTorch says Expected all tensors to be on the same device."
+    expected: trigger
+  - prompt: "Design a PatchCore ablation for a factory inspection line."
+    expected: trigger
+  - prompt: "TensorRT on Jetson reaches only 8 FPS."
+    expected: trigger
+  - prompt: "This session is long. Compact the context and continue."
+    expected: trigger
+  - prompt: "Push this repository to GitHub."
+    expected: no_trigger
+  - prompt: "How do I sort a Python list?"
+    expected: no_trigger
+  - prompt: "Write a vacation email."
+    expected: no_trigger
