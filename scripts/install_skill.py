@@ -5,26 +5,14 @@ import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "skills" / "engineering-research"
+SOURCE = ROOT / "skills" / "study-work"
 SKILL_NAME = SOURCE.name
 
 CLIENT_PATHS = {
-    "codex": {
-        "project": Path(".agents/skills"),
-        "user": Path.home() / ".agents" / "skills",
-    },
-    "claude": {
-        "project": Path(".claude/skills"),
-        "user": Path.home() / ".claude" / "skills",
-    },
-    "antigravity": {
-        "project": Path(".agents/skills"),
-        "user": Path.home() / ".gemini" / "config" / "skills",
-    },
-    "cursor": {
-        "project": Path(".cursor/skills"),
-        "user": Path.home() / ".cursor" / "skills",
-    },
+    "codex": {"project": Path(".agents/skills"), "user": Path.home() / ".agents" / "skills"},
+    "claude": {"project": Path(".claude/skills"), "user": Path.home() / ".claude" / "skills"},
+    "antigravity": {"project": Path(".agents/skills"), "user": Path.home() / ".gemini" / "config" / "skills"},
+    "cursor": {"project": Path(".cursor/skills"), "user": Path.home() / ".cursor" / "skills"},
 }
 
 
@@ -55,7 +43,7 @@ def install(destination: Path, force: bool) -> None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Install engineering-research Agent Skill.")
+    parser = argparse.ArgumentParser(description="Install study-work Agent Skill.")
     parser.add_argument("--client", choices=[*CLIENT_PATHS, "all"], required=True)
     parser.add_argument("--scope", choices=["project", "user"], default="user")
     parser.add_argument("--project-root", type=Path, default=Path.cwd())
@@ -65,8 +53,7 @@ def main() -> int:
     if not (SOURCE / "SKILL.md").is_file():
         raise FileNotFoundError(f"Missing source skill: {SOURCE}")
 
-    destinations = targets(clients(args.client), args.scope, args.project_root.resolve())
-    for destination in destinations:
+    for destination in targets(clients(args.client), args.scope, args.project_root.resolve()):
         install(destination, args.force)
         print(f"Installed: {destination}")
     return 0

@@ -22,9 +22,9 @@ jobs:
       - name: Build downloads
         run: python scripts/build.py
       - name: Inspect skill archive
-        run: python -m zipfile -l dist/engineering-research-skill.zip
+        run: python -m zipfile -l dist/study-work-skill.zip
       - name: Upload downloads
         uses: actions/upload-artifact@v4
         with:
-          name: engineering-research-downloads
+          name: study-work-downloads
           path: dist/

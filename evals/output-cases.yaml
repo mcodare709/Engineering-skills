@@ -1,5 +1,5 @@
 version: 1
-skill: engineering-research
+skill: study-work
 cases:
   - id: device-mismatch
     prompt: "Model is on CUDA. Input is on CPU."

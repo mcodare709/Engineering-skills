@@ -1,5 +1,5 @@
 version: 1
-skill: engineering-research
+skill: study-work
 cases:
   - prompt: "Training loss falls while validation loss rises. Diagnose it."
     expected: trigger

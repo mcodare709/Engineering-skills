@@ -4,9 +4,9 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL_DIR = ROOT / "skills" / "engineering-research"
+SKILL_DIR = ROOT / "skills" / "study-work"
 SKILL_FILE = SKILL_DIR / "SKILL.md"
-WEB_FILE = ROOT / "web" / "engineering-research.md"
+WEB_FILE = ROOT / "web" / "study-work.md"
 NAME_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 LINK_PATTERN = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
 CJK_PATTERN = re.compile(r"[\u3400-\u9fff]")
@@ -79,36 +79,23 @@ def validate_links(body: str) -> list[str]:
 
 def validate_english() -> list[str]:
     errors: list[str] = []
-    roots = [
-        ROOT / "README.md",
-        ROOT / "CHANGELOG.md",
-        ROOT / "skills",
-        ROOT / "web",
-        ROOT / "evals",
-        ROOT / "scripts",
-        ROOT / ".github",
-    ]
+    roots = [ROOT / "README.md", ROOT / "CHANGELOG.md", ROOT / "skills", ROOT / "web", ROOT / "evals", ROOT / "scripts", ROOT / ".github"]
     paths: list[Path] = []
     for item in roots:
         if item.is_file():
             paths.append(item)
         elif item.exists():
             paths.extend(path for path in item.rglob("*") if path.is_file())
-
     for path in paths:
-        if path.suffix.lower() not in TEXT_SUFFIXES:
-            continue
-        text = path.read_text(encoding="utf-8")
-        if CJK_PATTERN.search(text):
+        if path.suffix.lower() in TEXT_SUFFIXES and CJK_PATTERN.search(path.read_text(encoding="utf-8")):
             errors.append(f"Non-English CJK text found: {path.relative_to(ROOT)}")
     return errors
 
 
 def validate() -> list[str]:
     errors: list[str] = []
-
     if not SKILL_FILE.is_file():
-        return ["Missing skills/engineering-research/SKILL.md"]
+        return ["Missing skills/study-work/SKILL.md"]
     if (SKILL_DIR / "skill.md").exists():
         errors.append("Lowercase skill.md must not exist.")
 
@@ -120,7 +107,6 @@ def validate() -> list[str]:
     for field in ("name", "description"):
         if not metadata.get(field):
             errors.append(f"Missing frontmatter field: {field}")
-
     name = metadata.get("name", "")
     if name and not NAME_PATTERN.fullmatch(name):
         errors.append("Skill name must use lowercase kebab-case.")
@@ -132,37 +118,34 @@ def validate() -> list[str]:
         errors.append("SKILL.md body is empty.")
 
     errors.extend(validate_links(body))
-
     references = SKILL_DIR / "references"
     present = {path.name for path in references.glob("*.md")} if references.exists() else set()
     for missing in sorted(REQUIRED_REFERENCES - present):
         errors.append(f"Missing reference: {missing}")
 
     if not WEB_FILE.is_file() or not WEB_FILE.read_text(encoding="utf-8").strip():
-        errors.append("Missing web/engineering-research.md")
-
+        errors.append("Missing web/study-work.md")
     for required in (ROOT / "evals" / "trigger-cases.yaml", ROOT / "evals" / "output-cases.yaml"):
         if not required.is_file() or not required.read_text(encoding="utf-8").strip():
             errors.append(f"Missing eval file: {required.relative_to(ROOT)}")
 
     if (ROOT / "docs" / "images").exists() or (ROOT / "pit").exists():
         errors.append("Image documentation directories must not exist.")
-
     image_suffixes = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".svg"}
     for path in ROOT.rglob("*"):
         if path.is_file() and path.suffix.lower() in image_suffixes:
             errors.append(f"Image file not allowed: {path.relative_to(ROOT)}")
-
     if any((ROOT / "skills").glob("*.zip")):
         errors.append("Generated ZIP must not be committed under skills/.")
 
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     for token in (
-        ".agents/skills/engineering-research/",
-        ".claude/skills/engineering-research/",
-        ".cursor/skills/engineering-research/",
-        ".gemini/config/skills/engineering-research/",
-        "web/engineering-research.md",
+        ".agents/skills/study-work/",
+        ".claude/skills/study-work/",
+        ".cursor/skills/study-work/",
+        ".gemini/config/skills/study-work/",
+        "web/study-work.md",
+        "$study-work",
     ):
         if token not in readme:
             errors.append(f"README missing install target: {token}")

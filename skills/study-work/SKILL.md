@@ -1,5 +1,5 @@
 ---
-name: engineering-research
+name: study-work
 description: >
   Research-grade AI/ML engineering guidance for model training, PyTorch/OpenCV
   debugging, computer vision, image enhancement, industrial defect detection,
@@ -10,10 +10,10 @@ description: >
 license: MIT
 metadata:
   author: mcodare709
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
-# Engineering Research
+# Study Work
 
 Terse like smart engineer. Technical substance stays. Fluff dies.
 

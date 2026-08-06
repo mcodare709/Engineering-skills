@@ -5,8 +5,8 @@ import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL_DIR = ROOT / "skills" / "engineering-research"
-WEB_FILE = ROOT / "web" / "engineering-research.md"
+SKILL_DIR = ROOT / "skills" / "study-work"
+WEB_FILE = ROOT / "web" / "study-work.md"
 DIST = ROOT / "dist"
 FIXED_TIME = (1980, 1, 1, 0, 0, 0)
 
@@ -33,11 +33,7 @@ def build_skill_zip(output: Path) -> None:
 def build_public_zip(output: Path) -> None:
     with zipfile.ZipFile(output, "w", zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
         for source in skill_files():
-            add_file(
-                archive,
-                source,
-                Path("local") / SKILL_DIR.name / source.relative_to(SKILL_DIR),
-            )
+            add_file(archive, source, Path("local") / SKILL_DIR.name / source.relative_to(SKILL_DIR))
         add_file(archive, WEB_FILE, Path("web") / WEB_FILE.name)
         add_file(archive, ROOT / "README.md", Path("README.md"))
         add_file(archive, ROOT / "LICENSE", Path("LICENSE"))
@@ -50,9 +46,9 @@ def main() -> int:
         raise FileNotFoundError(f"Missing {WEB_FILE}")
 
     DIST.mkdir(parents=True, exist_ok=True)
-    build_skill_zip(DIST / "engineering-research-skill.zip")
-    shutil.copy2(WEB_FILE, DIST / "engineering-research-web.md")
-    build_public_zip(DIST / "engineering-research-public.zip")
+    build_skill_zip(DIST / "study-work-skill.zip")
+    shutil.copy2(WEB_FILE, DIST / "study-work-web.md")
+    build_public_zip(DIST / "study-work-public.zip")
 
     for path in sorted(DIST.iterdir()):
         print(f"Created: {path.relative_to(ROOT)}")

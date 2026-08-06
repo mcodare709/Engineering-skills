@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.1] - 2026-08-06
+
+### Changed
+
+- Renamed the public skill from `engineering-research` to `study-work`.
+- Updated Codex invocation to `$study-work`.
+- Updated install paths, web prompt, build outputs, eval metadata, and validation.
+
 ## [1.2.0] - 2026-08-06
 
 ### Added

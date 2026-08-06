@@ -1,8 +1,24 @@
-# Engineering Research Skill
+# Study Work Skill
 
 Portable Agent Skill for AI/ML research and engineering.
 
-One canonical skill. Same content for Codex, Claude Code, Antigravity IDE, and Cursor. A self-contained web prompt is included for browser-based assistants.
+One canonical skill for Codex, Claude Code, Antigravity IDE, and Cursor. A self-contained web prompt is included for browser assistants.
+
+## Invoke in Codex
+
+Type `$`, then select `study-work`.
+
+Direct invocation:
+
+```text
+$study-work <task>
+```
+
+Example:
+
+```text
+$study-work diagnose why training loss falls while validation loss rises
+```
 
 ## Scope
 
@@ -20,25 +36,9 @@ Do not use for generic programming, routine Git commands, or unrelated writing.
 
 ## Install
 
-Clone or download this repository:
-
 ```bash
 git clone https://github.com/mcodare709/Engineering-research-skills.git
 cd Engineering-research-skills
-```
-
-Run the cross-platform installer:
-
-```bash
-python scripts/install_skill.py --client codex --scope user
-python scripts/install_skill.py --client claude --scope user
-python scripts/install_skill.py --client antigravity --scope user
-python scripts/install_skill.py --client cursor --scope user
-```
-
-Install for every supported local client:
-
-```bash
 python scripts/install_skill.py --client all --scope user
 ```
 
@@ -54,18 +54,16 @@ Use `--force` to replace an existing installation.
 
 | Client | Project | User |
 |---|---|---|
-| Codex | `.agents/skills/engineering-research/` | `~/.agents/skills/engineering-research/` |
-| Claude Code | `.claude/skills/engineering-research/` | `~/.claude/skills/engineering-research/` |
-| Antigravity IDE | `.agents/skills/engineering-research/` | `~/.gemini/config/skills/engineering-research/` |
-| Cursor | `.cursor/skills/engineering-research/` | `~/.cursor/skills/engineering-research/` |
+| Codex | `.agents/skills/study-work/` | `~/.agents/skills/study-work/` |
+| Claude Code | `.claude/skills/study-work/` | `~/.claude/skills/study-work/` |
+| Antigravity IDE | `.agents/skills/study-work/` | `~/.gemini/config/skills/study-work/` |
+| Cursor | `.cursor/skills/study-work/` | `~/.cursor/skills/study-work/` |
 
 Codex and Antigravity share the project-level `.agents/skills/` path.
 
 ## Web Version
 
-Open [`web/engineering-research.md`](web/engineering-research.md). Copy the full file into a system prompt, project instruction, custom instruction, or persistent chat instruction.
-
-The web version is self-contained. It does not require reference-file loading.
+Open [`web/study-work.md`](web/study-work.md). Copy the full file into system instructions, project instructions, or custom instructions.
 
 ## Build Downloads
 
@@ -76,29 +74,16 @@ python scripts/build.py
 Outputs:
 
 ```text
-dist/engineering-research-skill.zip
-dist/engineering-research-web.md
-dist/engineering-research-public.zip
+dist/study-work-skill.zip
+dist/study-work-web.md
+dist/study-work-public.zip
 ```
-
-`engineering-research-public.zip` contains both local Agent Skill and web prompt.
 
 ## Validate
 
 ```bash
 python scripts/validate_skill.py
 ```
-
-Validation checks:
-
-- Exact `SKILL.md` casing
-- Required frontmatter and references
-- Broken relative links
-- English-only repository content
-- No image documentation
-- Web prompt presence
-- Eval presence
-- No committed generated ZIP
 
 ## Structure
 
@@ -109,15 +94,12 @@ Validation checks:
 ├── LICENSE
 ├── evals/
 ├── scripts/
-│   ├── build.py
-│   ├── install_skill.py
-│   └── validate_skill.py
 ├── skills/
-│   └── engineering-research/
+│   └── study-work/
 │       ├── SKILL.md
 │       └── references/
 └── web/
-    └── engineering-research.md
+    └── study-work.md
 ```
 
 ## License
