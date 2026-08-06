@@ -1,0 +1,30 @@
+version: 1
+skill: engineering-research
+cases:
+  - id: debug-device-mismatch
+    prompt: "model 在 cuda，但 input 在 cpu，完整解釋錯誤和修法"
+    required:
+      - identify device mismatch as root cause
+      - preserve the original error terminology
+      - provide minimal fix
+      - include a verification step
+  - id: training-overfit
+    prompt: "train accuracy 99%，validation 只有 70%"
+    required:
+      - discuss split and leakage before architecture changes
+      - distinguish overfitting from distribution mismatch
+      - propose measurable validation experiments
+  - id: defect-production
+    prompt: "實驗室效果好，但產線 false positive 很高"
+    required:
+      - inspect lighting and reflection drift
+      - discuss threshold calibration
+      - use part-level production metrics
+      - include stress-test conditions
+  - id: research-proposal
+    prompt: "提出一個 image enhancement 的研究方向"
+    required:
+      - state a testable hypothesis
+      - define baselines and ablations
+      - specify metrics and datasets
+      - include novelty and reviewer concerns

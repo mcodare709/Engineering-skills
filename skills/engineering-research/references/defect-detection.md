@@ -2,45 +2,62 @@
 
 ## Method Selection
 
-| Scenario | Preferred Approach |
+| Scenario | Preferred approach |
 |---|---|
-| Defects have clear labels and bounding boxes | YOLO or object detection |
-| Defects require precise shape | Instance segmentation |
-| Defects are rare or hard to label | Anomaly detection (PatchCore, FastFlow) |
-| Surface texture varies heavily | Feature-based + deep anomaly method |
-| Real-time production line (>30 FPS) | Lightweight detector or TensorRT deployment |
-| Very small defects (<10px) | High-res crop + dedicated small-object model |
+| Clear defect classes and bounding boxes | Object detection |
+| Precise defect shape is required | Semantic/instance segmentation |
+| Defects are rare or difficult to enumerate | Anomaly detection |
+| Product position is stable | Registration + ROI-specific inspection |
+| Product position varies | Detection/feature alignment before inspection |
+| Very small defects | High-resolution crop, tiling or dedicated small-object pipeline |
+| Strict real-time requirement | Lightweight model plus target-hardware optimization |
 
 ## Pipeline Structure
 
-When proposing a detection pipeline, always include all seven stages:
+1. **Image acquisition** — camera, lens, lighting, trigger, exposure
+2. **Geometric normalization** — registration, crop, distortion correction
+3. **Preprocessing** — color conversion, normalization, reflection control
+4. **Inspection model** — method and rationale
+5. **Decision rule** — threshold, aggregation, fallback and review
+6. **Evaluation** — defect-level and part-level metrics
+7. **Deployment** — latency, traceability, operator workflow and drift monitoring
 
-1. **Image acquisition** — camera spec, lighting setup, trigger mode
-2. **Preprocessing** — denoise, normalize, crop, resize
-3. **Detection method** — chosen model and rationale
-4. **Decision rule** — threshold, ensemble, fallback logic
-5. **Evaluation metrics** — precision, recall, F1, FPR at target TPR
-6. **Failure cases** — where the method is expected to struggle
-7. **Deployment concerns** — latency, operator review, alert workflow
+## Dataset and Split Rules
 
-## Production Constraints to Prioritize
+- Split by product ID, batch/lot, acquisition date or production condition where relevant.
+- Prevent near-duplicate frames of the same part from crossing splits.
+- Keep a dedicated threshold-calibration set separate from final test data.
+- Record lighting, camera, machine, material and sample-aging metadata.
+- Audit annotation consistency across labelers and defect severity levels.
 
-- Lighting stability and reflection/glare control
-- Camera angle consistency and lens distortion
-- Motion blur at production speed
-- Sample aging and surface contamination variation
-- Annotation consistency across labelers
-- Defect size distribution (micro vs. macro defects)
-- False positive cost vs. false negative cost — clarify with user
-- Threshold stability under distribution shift
-- Operator review workflow integration
+## Metrics
 
-## Common Failure Root Causes
+Do not report only image-level accuracy. Select metrics matching production cost:
 
-| Failure | Root Cause |
+- Defect-level recall and precision
+- Part-level false reject rate and false accept rate
+- False positives per image/part
+- Recall by defect size and severity
+- FPR at target TPR
+- Threshold stability across lots and lighting conditions
+- Operator review rate
+- Cost-weighted FP/FN score when business cost is available
+
+## Production Failure Causes
+
+| Failure | Likely cause |
 |---|---|
-| High false positive rate | Lighting inconsistency or low threshold |
-| High false negative rate | Threshold too high or missing training examples |
-| Good lab, poor line performance | Distribution shift (lighting, speed, angle) |
-| Model degraded over time | Sample aging not in training set |
-| Inconsistent results same part | Camera trigger timing or vibration |
+| High false positive | Lighting/reflection drift, contamination, threshold too low |
+| High false negative | Missing defect modes, resolution too low, threshold too high |
+| Good lab, poor line | Distribution shift in speed, angle, lighting or material |
+| Performance degrades over time | Sample aging, lens contamination, process drift |
+| Same part gives inconsistent result | Trigger timing, vibration, auto exposure or registration instability |
+
+## Validation Stress Tests
+
+- Multiple shifts and production days
+- Clean and contaminated lens conditions
+- Expected exposure and lighting drift
+- Product aging and material batches
+- Maximum line speed and motion blur
+- Borderline defects near acceptance threshold

@@ -2,11 +2,8 @@
 
 ## Core Rule
 
-Concise = remove redundant structure, not compress logic into one line.
+精簡 code 是移除重複與不必要結構，不是將獨立邏輯壓縮成同一行。
 
-## Line Formatting
-
-Never chain independent statements:
 ```python
 # Bad
 model.eval(); x = x.to(device); y = model(x)
@@ -17,39 +14,37 @@ x = x.to(device)
 y = model(x)
 ```
 
-Allowed one-liners — only when they don't hide logic:
-```python
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model = Net().to(device).eval()
-img = cv2.imread(str(img_path))
-files = sorted(Path(root).glob("*.png"))
-x = x.to(device, non_blocking=True)
-loss = criterion(output, target.long())
-```
-
-## Artifact vs Inline
-
-| Use artifact | Use inline code block |
-|---|---|
-| Complete scripts | Short snippets or patches |
-| > ~40 lines | CLI commands |
-| Code user will edit/reuse | Single functions |
-| Training / inference pipelines | Illustrative examples |
-
-Artifact contains only code. Explanation goes in chat.
-
-## Completeness by Request
+## Completeness
 
 | Request | Must include |
 |---|---|
-| "完整程式碼" | All imports, init, error handling — no placeholders |
-| "簡潔程式碼" | Remove unused vars, redundant comments, verbose wrappers |
+| 完整程式碼 | Imports, initialization, validation, error handling, entry point |
+| 精簡程式碼 | Remove unused variables, duplication and verbose wrappers |
 | Training pipeline | Dataset, model, loss, optimizer, loop, validation, checkpoint |
-| Inference pipeline | Preprocessing, load, infer, post-process, output |
-| Refactor | Preserve behavior unless user explicitly says otherwise |
+| Inference pipeline | Preprocess, load, infer, post-process, output |
+| Refactor | Preserve behavior unless explicitly requested otherwise |
+| Debug fix | Minimal patch plus verification; full file when changes span locations |
 
-## What "Concise" Means
+## Output Method
 
-Remove: redundant comments, repeated logic, unused variables, unnecessary wrappers.
+For complete or reusable code:
 
-Keep: correctness, execution order, imports, error handling, readability.
+1. If the client supports file/artifact creation, create a standalone file.
+2. Otherwise return one complete fenced code block.
+3. Do not split one runnable file across many disconnected snippets.
+4. Put explanation outside the code file unless comments are required for maintenance.
+
+For short commands, one function or a small patch, use an inline code block.
+
+## Style
+
+- Follow language conventions and existing project style.
+- Do not chain independent statements with semicolons.
+- Preserve function/API names and public interfaces.
+- Add type hints and input validation when they improve correctness.
+- Handle missing files, invalid shapes and unavailable devices where applicable.
+- Do not introduce abstraction that has only one trivial use.
+
+## Safe Changes
+
+Before destructive operations, state what will be removed or overwritten. Prefer backup, new output path, new Git branch or non-force operation.
