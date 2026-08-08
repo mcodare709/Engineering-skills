@@ -8,6 +8,7 @@ cases:
       - minimal fix
       - exact technical names
       - verification
+      - concise output
   - id: production-false-positive
     prompt: "Lab results are good. Production false positives are high."
     required:
@@ -35,3 +36,30 @@ cases:
       - current state
       - open risks
       - next action
+  - id: output-compression
+    prompt: "Explain why `torch.cuda.is_available()` returns false."
+    required:
+      - terse prose
+      - exact code symbol
+      - technical completeness
+      - no filler
+  - id: preserve-error
+    prompt: "Explain `Expected all tensors to be on the same device`."
+    required:
+      - exact error string
+      - root cause
+      - minimal fix
+      - verification
+  - id: auto-clarity
+    prompt: "Give the safest way to perform a destructive Git reset."
+    required:
+      - explicit warning
+      - clear operation order
+      - safer alternative
+      - no ambiguous compression
+  - id: normal-mode
+    prompt: "stop caveman and explain the previous issue normally"
+    required:
+      - normal prose
+      - no forced compression
+      - technical completeness
