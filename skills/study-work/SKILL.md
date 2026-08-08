@@ -8,9 +8,6 @@ description: >
   diagnosis, reproducible evidence, measurable validation, or deployment trade-offs.
   Do not use for generic programming, routine Git operations, or unrelated writing.
 license: MIT
-metadata:
-  author: mcodare709
-  version: "1.3.0"
 ---
 
 # Study Work
