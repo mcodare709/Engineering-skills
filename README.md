@@ -1,9 +1,13 @@
 # Engineering Skills
 
+**English** | [繁體中文](README.zh-TW.md)
+
 Portable Agent Skill for AI/ML research, engineering, and token-efficient technical output.
 
 One canonical `study-work` skill for Codex, Claude Code, Antigravity IDE, Cursor, and browser assistants.
-> 本人的習慣,如有不便請多包涵.
+
+> This reflects my personal workflow preferences; adjust as needed.
+
 ## Skill
 
 ### `study-work`
@@ -87,6 +91,7 @@ Validation checks the single-skill layout, metadata, local links, required refer
 ```text
 .
 ├── README.md
+├── README.zh-TW.md
 ├── CHANGELOG.md
 ├── LICENSE
 ├── evals/
