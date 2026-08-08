@@ -1,31 +1,31 @@
-# Engineering Skills
+# Engineering Skills（工程技能）
 
-[English](README.md) | **繁體中文**
+[英文](README.md) | **繁體中文**
 
-適用於 AI/ML 研究、工程開發與 token-efficient technical output 的可攜式 Agent Skill。
+適用於 AI/ML 研究、工程開發與節省 token 的技術輸出之可攜式 Agent 技能。
 
-本專案提供單一 canonical `study-work` skill，可用於 Codex、Claude Code、Antigravity IDE、Cursor 與瀏覽器型 AI assistant。
+本專案提供單一正式的 `study-work` 技能，可用於 Codex、Claude Code、Antigravity IDE、Cursor 與瀏覽器型 AI 助手。
 
 > 這是依照本人的工作習慣設計，如有不便請自行調整。
 
-## Skill
+## 技能
 
 ### `study-work`
 
 研究與工程工作流程涵蓋：
 
-- Model training 與 debugging
-- Computer vision 與 image enhancement
-- Industrial defect detection 與 anomaly detection
-- Experiment design、paper review 與 ablation planning
-- ONNX、TensorRT、Jetson、latency 與 production inference
-- Technical report 與 experiment record
-- Long-session context compaction
-- 使用 Caveman reporting method 的 token-efficient technical output
+- 模型訓練與除錯
+- 電腦視覺與影像增強
+- 工業瑕疵檢測與異常檢測
+- 實驗設計、論文審查與消融實驗規劃
+- ONNX、TensorRT、Jetson、延遲與生產環境推論
+- 技術報告與實驗紀錄
+- 長對話上下文壓縮
+- 使用 Caveman 精簡回應方式，降低技術輸出的 token 使用量
 
-Skill：[study-work](https://github.com/mcodare709/Engineering-skills/tree/main/skills/study-work "study-work")
+技能：[study-work](https://github.com/mcodare709/Engineering-skills/tree/main/skills/study-work "study-work")
 
-Caveman 在本專案中不是獨立 skill，而是整合於 [`references/caveman.md`](skills/study-work/references/caveman.md) 的輸出方法 reference。
+Caveman 在本專案中不是獨立技能，而是整合於 [`references/caveman.md`](skills/study-work/references/caveman.md) 的輸出風格參考規則。
 
 Codex：
 
@@ -41,7 +41,7 @@ cd Engineering-skills
 python scripts/install_skill.py --client all --scope user
 ```
 
-Project scope 安裝：
+專案範圍安裝：
 
 ```bash
 python scripts/install_skill.py --client all --scope project --project-root .
@@ -51,18 +51,18 @@ python scripts/install_skill.py --client all --scope project --project-root .
 
 ## 安裝位置
 
-| Client | Project | User |
+| 用戶端 | 專案 | 使用者 |
 |---|---|---|
 | Codex | `.agents/skills/study-work/` | `~/.agents/skills/study-work/` |
 | Claude Code | `.claude/skills/study-work/` | `~/.claude/skills/study-work/` |
 | Antigravity IDE | `.agents/skills/study-work/` | `~/.gemini/config/skills/study-work/` |
 | Cursor | `.cursor/skills/study-work/` | `~/.cursor/skills/study-work/` |
 
-Codex 與 Antigravity 在 project scope 共用 `.agents/skills/` 路徑。
+Codex 與 Antigravity 在專案範圍共用 `.agents/skills/` 路徑。
 
-## Web 版本
+## 網頁版
 
-開啟 [`web/study-work.md`](web/study-work.md)，將完整內容複製到 system instructions、project instructions 或 custom instructions。
+開啟 [`web/study-work.md`](web/study-work.md)，將完整內容複製到系統指令、專案指令或自訂指令。
 
 ## 建置下載檔
 
@@ -84,7 +84,7 @@ dist/study-work-public.zip
 python scripts/validate_skill.py
 ```
 
-Validation 會檢查 single-skill layout、metadata、local links、必要 references、web prompt、eval files、英文技術內容與禁止出現的 legacy artifacts。
+驗證程序會檢查單一技能架構、中繼資料、本地連結、必要參考檔、網頁提示詞、評估檔案、英文技術內容，以及禁止出現的舊版殘留檔案。
 
 ## 專案結構
 
@@ -107,12 +107,12 @@ Validation 會檢查 single-skill layout、metadata、local links、必要 refer
     └── study-work.md
 ```
 
-## License
+## 授權
 
-MIT.
+MIT。
 
 ### 如果這個專案對你有幫助，歡迎給個 Star。
 
-## Credits
+## 致謝
 
-Caveman reporting method：[caveman](https://github.com/mcodare709/subagent/tree/main/.agents/skills/caveman "caveman")。此方法以精簡且技術正確的輸出為主，在不影響清晰度的前提下降低 report/output token 使用量。
+Caveman 精簡回應方式：[caveman](https://github.com/mcodare709/subagent/tree/main/.agents/skills/caveman "caveman")。此方法以精簡且技術正確的輸出為主，在不影響清晰度的前提下降低回應 token 使用量。
