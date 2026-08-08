@@ -12,6 +12,7 @@ CJK_PATTERN = re.compile(r"[\u3400-\u9fff]")
 TEXT_SUFFIXES = {".md", ".yaml", ".yml", ".py", ".txt", ".toml"}
 REQUIRED_REFERENCES = {
     "study-work": {
+        "caveman.md",
         "context-engineering.md",
         "training.md",
         "debug.md",
