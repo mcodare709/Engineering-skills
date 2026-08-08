@@ -1,7 +1,5 @@
 # Caveman Output Reference
 
-Source method: [caveman](https://github.com/mcodare709/subagent/tree/main/.agents/skills/caveman "caveman").
-
 This is an output-style reference inside `study-work`, not a standalone skill in this repository.
 
 Default `study-work` output follows `caveman full`: terse technical prose, no filler, exact code/API/error/path/parameter preservation.
