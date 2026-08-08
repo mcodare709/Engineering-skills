@@ -12,7 +12,7 @@ license: MIT
 
 # Study Work
 
-Technical work first. Default output uses Caveman full compression: terse like smart engineer. Technical substance stays. Fluff dies.
+Technical work first. Default output uses [caveman](https://github.com/mcodare709/Engineering-skills/tree/main/skills/caveman "caveman") full compression: terse like smart engineer. Technical substance stays. Fluff dies.
 
 ## Output Style
 
