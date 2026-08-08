@@ -1,28 +1,14 @@
-# Study Work Skill
+# Engineering Skills
 
-Portable Agent Skill for AI/ML research and engineering.
+Portable Agent Skills for AI/ML research, engineering, and token-efficient technical output.
 
-One canonical skill for Codex, Claude Code, Antigravity IDE, and Cursor. A self-contained web prompt is included for browser assistants.
+One repository for Codex, Claude Code, Antigravity IDE, Cursor, and browser assistants.
 
-## Invoke in Codex
+## Skills
 
-Type `$`, then select `study-work`.
+### `study-work`
 
-Direct invocation:
-
-```text
-$study-work <task>
-```
-
-Example:
-
-```text
-$study-work diagnose why training loss falls while validation loss rises
-```
-
-## Scope
-
-Use for:
+Research-grade AI/ML engineering workflow for:
 
 - Model training and debugging
 - Computer vision and image enhancement
@@ -32,20 +18,53 @@ Use for:
 - Technical reports and experiment records
 - Long-session context compaction
 
-Do not use for generic programming, routine Git commands, or unrelated writing.
+Codex:
+
+```text
+$study-work diagnose why training loss falls while validation loss rises
+```
+
+### `caveman`
+
+Token-efficient output style. Compresses prose while preserving technical detail, code, commands, API names, paths, parameters, and exact error strings.
+
+Levels: `lite`, `full`, `ultra`.
+
+Codex:
+
+```text
+$caveman explain this error
+$caveman ultra summarize this result
+```
+
+Use `stop caveman` or `normal mode` to return to normal prose.
 
 ## Install
 
+Clone:
+
 ```bash
-git clone https://github.com/mcodare709/Engineering-research-skills.git
-cd Engineering-research-skills
-python scripts/install_skill.py --client all --scope user
+git clone https://github.com/mcodare709/Engineering-skills.git
+cd Engineering-skills
+```
+
+Install all skills for all supported clients:
+
+```bash
+python scripts/install_skill.py --skill all --client all --scope user
+```
+
+Install one skill:
+
+```bash
+python scripts/install_skill.py --skill study-work --client codex --scope user
+python scripts/install_skill.py --skill caveman --client codex --scope user
 ```
 
 Project-scoped install:
 
 ```bash
-python scripts/install_skill.py --client all --scope project --project-root .
+python scripts/install_skill.py --skill all --client all --scope project --project-root .
 ```
 
 Use `--force` to replace an existing installation.
@@ -54,16 +73,19 @@ Use `--force` to replace an existing installation.
 
 | Client | Project | User |
 |---|---|---|
-| Codex | `.agents/skills/study-work/` | `~/.agents/skills/study-work/` |
-| Claude Code | `.claude/skills/study-work/` | `~/.claude/skills/study-work/` |
-| Antigravity IDE | `.agents/skills/study-work/` | `~/.gemini/config/skills/study-work/` |
-| Cursor | `.cursor/skills/study-work/` | `~/.cursor/skills/study-work/` |
+| Codex | `.agents/skills/<skill>/` | `~/.agents/skills/<skill>/` |
+| Claude Code | `.claude/skills/<skill>/` | `~/.claude/skills/<skill>/` |
+| Antigravity IDE | `.agents/skills/<skill>/` | `~/.gemini/config/skills/<skill>/` |
+| Cursor | `.cursor/skills/<skill>/` | `~/.cursor/skills/<skill>/` |
 
 Codex and Antigravity share the project-level `.agents/skills/` path.
 
-## Web Version
+## Web Versions
 
-Open [`web/study-work.md`](web/study-work.md). Copy the full file into system instructions, project instructions, or custom instructions.
+- [`web/study-work.md`](web/study-work.md)
+- [`web/caveman.md`](web/caveman.md)
+
+Copy the full prompt into system instructions, project instructions, or custom instructions.
 
 ## Build Downloads
 
@@ -77,6 +99,9 @@ Outputs:
 dist/study-work-skill.zip
 dist/study-work-web.md
 dist/study-work-public.zip
+dist/caveman-skill.zip
+dist/caveman-web.md
+dist/caveman-public.zip
 ```
 
 ## Validate
@@ -84,6 +109,8 @@ dist/study-work-public.zip
 ```bash
 python scripts/validate_skill.py
 ```
+
+Validation checks skill metadata, local links, required references, web prompts, eval files, English-only project text, and forbidden image artifacts.
 
 ## Structure
 
@@ -93,13 +120,20 @@ python scripts/validate_skill.py
 ├── CHANGELOG.md
 ├── LICENSE
 ├── evals/
+│   ├── trigger-cases.yaml
+│   ├── output-cases.yaml
+│   ├── caveman-trigger-cases.yaml
+│   └── caveman-output-cases.yaml
 ├── scripts/
 ├── skills/
-│   └── study-work/
-│       ├── SKILL.md
-│       └── references/
+│   ├── study-work/
+│   │   ├── SKILL.md
+│   │   └── references/
+│   └── caveman/
+│       └── SKILL.md
 └── web/
-    └── study-work.md
+    ├── study-work.md
+    └── caveman.md
 ```
 
 ## License
