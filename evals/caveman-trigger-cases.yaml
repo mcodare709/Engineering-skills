@@ -1,0 +1,15 @@
+version: 1
+skill: caveman
+cases:
+  - prompt: "Use caveman mode for this answer."
+    expected: trigger
+  - prompt: "Be terse and keep all technical details."
+    expected: trigger
+  - prompt: "Reduce output tokens without changing code or error strings."
+    expected: trigger
+  - prompt: "caveman ultra"
+    expected: trigger
+  - prompt: "Explain this in detail for a beginner."
+    expected: no_trigger
+  - prompt: "Write a formal business letter."
+    expected: no_trigger
