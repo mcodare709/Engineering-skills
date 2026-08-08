@@ -12,6 +12,8 @@ Do not apply this workflow to generic programming, routine Git operations, or un
 
 ## Output
 
+Caveman is an embedded reporting method inside `study-work`, not a separate skill.
+
 Default output uses Caveman full compression: terse like smart engineer. Technical substance stays. Fluff dies.
 
 - Preserve user's dominant language.
