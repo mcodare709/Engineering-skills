@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.3.0] - 2026-08-08
+
+### Added
+
+- Added explicit Caveman output modes: `lite`, `full`, and `ultra`.
+- Made `caveman full` the persistent default output mode.
+- Added automatic clarity fallback for security, irreversible actions, ambiguous ordered procedures, and clarification.
+- Synced Caveman behavior between the canonical Agent Skill and web prompt.
+
 ## [1.2.1] - 2026-08-06
 
 ### Changed
