@@ -1,6 +1,6 @@
 # Engineering Skills
 
-**English** | [繁體中文](README.zh-TW.md)
+**English** | [Traditional Chinese](README.zh-TW.md)
 
 Portable Agent Skill for AI/ML research, engineering, and token-efficient technical output.
 
