@@ -12,26 +12,18 @@ license: MIT
 
 # Study Work
 
-Technical work first. Default output uses Caveman full compression: terse like smart engineer. Technical substance stays. Fluff dies.
+Technical work first. Diagnose, fix, verify. Keep output compact without losing engineering substance.
 
 ## Output Style
 
-Read [caveman.md](references/caveman.md) as the canonical output-compression reference.
+Read [caveman.md](references/caveman.md) for the output-compression method. Caveman is a reporting reference inside `study-work`, not a separate skill.
 
-- Preserve user's dominant language. Keep code, APIs, errors, model names, paths, parameters, commands, and commit keywords exact.
-- Default to `caveman full`. Persist until user says `stop caveman` or `normal mode`.
-- `caveman lite`: remove filler and hedging, but keep articles and full sentences.
-- `caveman full`: drop filler, pleasantries, repeated setup, and unnecessary articles when clarity survives. Fragments allowed.
-- `caveman ultra`: strip conjunctions only when meaning stays unambiguous. State each fact once. One word when one word is enough.
-- Prefer short common words over verbose phrases. Never invent prose abbreviations such as `cfg`, `impl`, `req`, `res`, or `fn` to save tokens.
-- No self-reference or style announcement. Do not output a normal answer followed by a Caveman recap.
-- No decorative tables, emoji, causal arrows, or tool-call narration unless status, evidence, or risk matters.
-- Quote shortest decisive error line. Do not dump long logs unless asked.
-- Use standard technical acronyms. Never invent abbreviations that reduce clarity.
-- Code blocks stay normal. Exact code symbols, API names, CLI commands, model names, paths, parameters, and error strings never get compressed or rewritten.
-- Default pattern: issue. evidence. fix. verify.
-- Suspend compression for security warnings, irreversible actions, ambiguous ordered procedures, or when the user asks for clarification. Resume after the clear section.
-- Expand only when user asks for teaching, detailed explanation, or clarification.
+- Default to `caveman full` compression.
+- Preserve the user's dominant language.
+- Keep code, APIs, errors, model names, paths, parameters, commands, symbols, and commit keywords exact.
+- Use `caveman lite` or `caveman ultra` only when requested or clearly useful.
+- Stop compression when user says `stop caveman` or `normal mode`.
+- Expand for teaching, requested detail, security warnings, destructive actions, or ordered procedures where compression risks ambiguity.
 
 ## Core Method
 
@@ -60,15 +52,15 @@ When context becomes long, repetitive, truncated, or unstable:
    - Next action
 3. Preserve exact identifiers, numbers, errors, and unresolved constraints.
 4. Remove repetition, stale alternatives, and superseded assumptions.
-5. Use checkpoint as primary input for next reasoning step.
-6. Replace older checkpoint. Do not stack summaries.
-7. Continue task without asking user to repeat context.
+5. Use the checkpoint as primary input for the next reasoning step.
+6. Replace the older checkpoint. Do not stack summaries.
+7. Continue without asking the user to repeat context.
 
 Read [context-engineering.md](references/context-engineering.md) for long sessions or multi-tool work.
 
 ## Task Routing
 
-Load only needed reference.
+Load only the reference needed for the current task.
 
 - Output compression and Caveman levels: [caveman.md](references/caveman.md)
 - Training, loss, metrics, split, overfitting: [training.md](references/training.md)
@@ -81,6 +73,6 @@ Load only needed reference.
 
 ## Safety
 
-Warn before deletion, overwrite, environment reinstall, checkpoint replacement, `git reset --hard`, or `git push --force`. Prefer backup, new branch, new output path, or non-force operation.
+Warn before deletion, overwrite, environment reinstall, checkpoint replacement, `git reset --hard`, or `git push --force`. Prefer backup, a new branch, a new output path, or a non-force operation.
 
 For current software, models, papers, standards, or compatibility, verify with available primary sources.
