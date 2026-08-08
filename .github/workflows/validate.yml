@@ -21,12 +21,10 @@ jobs:
         run: python scripts/validate_skill.py
       - name: Build downloads
         run: python scripts/build.py
-      - name: Inspect skill archives
-        run: |
-          python -m zipfile -l dist/study-work-skill.zip
-          python -m zipfile -l dist/caveman-skill.zip
+      - name: Inspect skill archive
+        run: python -m zipfile -l dist/study-work-skill.zip
       - name: Upload downloads
         uses: actions/upload-artifact@v4
         with:
-          name: engineering-skills-downloads
+          name: study-work-downloads
           path: dist/
