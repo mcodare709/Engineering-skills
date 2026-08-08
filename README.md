@@ -18,7 +18,7 @@ Research-grade AI/ML engineering workflow for:
 - Technical reports and experiment records
 - Long-session context compaction
 
-Skill file: [study-work/SKILL.md](https://github.com/mcodare709/Engineering-skills/blob/main/skills/study-work/SKILL.md)
+Skill: [study-work](https://github.com/mcodare709/Engineering-skills/tree/main/skills/study-work "study-work")
 
 Codex:
 
@@ -29,6 +29,8 @@ $study-work diagnose why training loss falls while validation loss rises
 ### `caveman`
 
 Token-efficient output style. Compresses prose while preserving technical detail, code, commands, API names, paths, parameters, and exact error strings.
+
+Skill: [caveman](https://github.com/mcodare709/Engineering-skills/tree/main/skills/caveman "caveman")
 
 Levels: `lite`, `full`, `ultra`.
 
@@ -146,4 +148,4 @@ MIT.
 
 ## Credits
 
-Caveman reporting method and skill: [caveman](https://github.com/mcodare709/subagent/blob/main/.agents/skills/caveman/SKILL.md). It favors terse, technically accurate output to reduce report/output tokens where clarity remains intact.
+Caveman reporting method and skill: [caveman](https://github.com/mcodare709/Engineering-skills/tree/main/skills/caveman "caveman"). It favors terse, technically accurate output to reduce report/output tokens where clarity remains intact.
