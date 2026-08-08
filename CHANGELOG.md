@@ -4,26 +4,30 @@
 
 ### Added
 
-- Added `caveman` as a standalone portable Agent Skill.
-- Added a self-contained `web/caveman.md` prompt.
-- Added Caveman trigger and output eval cases.
-- Added `--skill study-work|caveman|all` installation support.
-- Added per-skill build outputs for local, web, and public bundles.
+- Added `skills/study-work/references/caveman.md` as the canonical Caveman output-method reference inside `study-work`.
+- Added Caveman compression, exact-string preservation, auto-clarity, and normal-mode coverage to the `study-work` output evals.
 
 ### Changed
 
-- Converted installer, builder, and validator from single-skill to multi-skill operation.
-- Updated README for both `$study-work` and `$caveman`.
+- Kept the repository as one canonical Agent Skill: `study-work`.
+- Centralized detailed Caveman rules in the `study-work` reference instead of duplicating them in `SKILL.md`.
+- Restored single-skill installer, builder, validator, README, and CI behavior.
 - Corrected clone instructions to `mcodare709/Engineering-skills`.
+
+### Removed
+
+- Removed standalone `caveman` skill packaging and invocation.
+- Removed standalone `web/caveman.md` and Caveman-only eval files.
+- Removed multi-skill `--skill` installer/build behavior.
 
 ## [1.3.0] - 2026-08-08
 
 ### Added
 
-- Added explicit Caveman output modes: `lite`, `full`, and `ultra`.
-- Made `caveman full` the persistent default output mode.
+- Added explicit Caveman output modes: `lite`, `full`, and `ultra` inside `study-work`.
+- Made `caveman full` the default compact output mode.
 - Added automatic clarity fallback for security, irreversible actions, ambiguous ordered procedures, and clarification.
-- Synced Caveman behavior between the canonical Agent Skill and web prompt.
+- Synced compact-output behavior between the canonical Agent Skill and web prompt.
 
 ## [1.2.1] - 2026-08-06
 
@@ -46,7 +50,7 @@
 ### Changed
 
 - Rewrote all skill content in concise English.
-- Adapted output rules from the Caveman skill: terse, exact, no filler.
+- Adapted output rules from the Caveman method: terse, exact, no filler.
 - Reduced platform-specific wording and kept one canonical Agent Skill source.
 
 ### Removed
