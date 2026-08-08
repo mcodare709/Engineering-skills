@@ -6,9 +6,6 @@ description: >
   Use when the user asks for caveman mode, terse output, fewer tokens, compact
   reporting, or directly invokes the caveman skill.
 license: MIT
-metadata:
-  author: mcodare709
-  version: "1.0.0"
 ---
 
 # Caveman
