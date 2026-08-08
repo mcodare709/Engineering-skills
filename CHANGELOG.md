@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.4.0] - 2026-08-08
+
+### Added
+
+- Added `caveman` as a standalone portable Agent Skill.
+- Added a self-contained `web/caveman.md` prompt.
+- Added Caveman trigger and output eval cases.
+- Added `--skill study-work|caveman|all` installation support.
+- Added per-skill build outputs for local, web, and public bundles.
+
+### Changed
+
+- Converted installer, builder, and validator from single-skill to multi-skill operation.
+- Updated README for both `$study-work` and `$caveman`.
+- Corrected clone instructions to `mcodare709/Engineering-skills`.
+
 ## [1.3.0] - 2026-08-08
 
 ### Added
