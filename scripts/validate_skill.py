@@ -22,6 +22,10 @@ REQUIRED_REFERENCES = {
         "code-rules.md",
     }
 }
+REQUIRED_EVALS = {
+    "study-work": {"trigger-cases.yaml", "output-cases.yaml"},
+    "caveman": {"caveman-trigger-cases.yaml", "caveman-output-cases.yaml"},
+}
 
 
 def frontmatter(text: str) -> tuple[dict[str, str], str]:
@@ -134,6 +138,11 @@ def validate_skill(skill_dir: Path) -> list[str]:
     web_file = WEB_ROOT / f"{skill_dir.name}.md"
     if not web_file.is_file() or not web_file.read_text(encoding="utf-8").strip():
         errors.append(f"Missing {web_file.relative_to(ROOT)}")
+
+    for filename in sorted(REQUIRED_EVALS.get(skill_dir.name, set())):
+        eval_file = ROOT / "evals" / filename
+        if not eval_file.is_file() or not eval_file.read_text(encoding="utf-8").strip():
+            errors.append(f"{skill_dir.name}: missing eval file: {eval_file.relative_to(ROOT)}")
     return errors
 
 
@@ -145,10 +154,6 @@ def validate() -> list[str]:
 
     for skill_dir in skills:
         errors.extend(validate_skill(skill_dir))
-
-    for required in (ROOT / "evals" / "trigger-cases.yaml", ROOT / "evals" / "output-cases.yaml"):
-        if not required.is_file() or not required.read_text(encoding="utf-8").strip():
-            errors.append(f"Missing eval file: {required.relative_to(ROOT)}")
 
     if (ROOT / "docs" / "images").exists() or (ROOT / "pit").exists():
         errors.append("Image documentation directories must not exist.")
