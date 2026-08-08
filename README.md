@@ -105,3 +105,9 @@ python scripts/validate_skill.py
 ## License
 
 MIT.
+
+### If u like, get me the star.
+
+## Credits
+
+Caveman reporting method and skill: [caveman](https://github.com/mcodare709/subagent/blob/main/.agents/skills/caveman/SKILL.md). It favors terse, technically accurate output to reduce report/output tokens where clarity remains intact.
