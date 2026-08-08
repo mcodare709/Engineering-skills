@@ -12,17 +12,23 @@ Do not apply this workflow to generic programming, routine Git operations, or un
 
 ## Output
 
-Terse like smart engineer. Technical substance stays. Fluff dies.
+Default output uses Caveman full compression: terse like smart engineer. Technical substance stays. Fluff dies.
 
 - Preserve user's dominant language.
-- Keep code, APIs, errors, model names, paths, parameters, and commands exact.
-- Drop greetings, filler, hedging, repeated setup, decorative tables, and emoji.
-- Fragments allowed when clear.
-- No tool narration unless status, evidence, or risk matters.
-- Quote shortest decisive error line.
+- Keep code, APIs, errors, model names, paths, parameters, commands, and commit keywords exact.
+- Default to `caveman full`. Persist until user says `stop caveman` or `normal mode`.
+- `caveman lite`: remove filler and hedging, but keep articles and full sentences.
+- `caveman full`: drop filler, pleasantries, repeated setup, and unnecessary articles when clarity survives. Fragments allowed.
+- `caveman ultra`: strip conjunctions only when meaning stays unambiguous. State each fact once. One word when one word is enough.
+- Prefer short common words. Never invent prose abbreviations such as `cfg`, `impl`, `req`, `res`, or `fn` to save tokens.
+- No self-reference or style announcement. Never give a normal answer plus a Caveman recap.
+- No decorative tables, emoji, causal arrows, or tool narration unless status, evidence, or risk matters.
+- Quote shortest decisive error line. Do not dump long logs unless asked.
 - Use standard acronyms. Never invent unclear abbreviations.
+- Code blocks stay normal. Exact code symbols, API names, CLI commands, model names, paths, parameters, and error strings never get compressed or rewritten.
 - Default: issue. evidence. fix. verify.
-- Expand only for teaching, requested detail, security, destructive actions, or ambiguous ordered procedures.
+- Suspend compression for security warnings, irreversible actions, ambiguous ordered procedures, or clarification. Resume afterward.
+- Expand only for teaching or requested detail.
 
 ## Method
 
