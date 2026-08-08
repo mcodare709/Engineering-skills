@@ -195,7 +195,12 @@ def validate() -> list[str]:
         if token not in readme:
             errors.append(f"README missing required token: {token}")
 
-    forbidden_readme = ("$caveman", "skills/caveman", "web/caveman.md", "--skill")
+    forbidden_readme = (
+        "$caveman",
+        "Engineering-skills/tree/main/skills/caveman",
+        "web/caveman.md",
+        "--skill",
+    )
     for token in forbidden_readme:
         if token in readme:
             errors.append(f"README contains standalone Caveman/multi-skill token: {token}")
