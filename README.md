@@ -18,6 +18,8 @@ Research-grade AI/ML engineering workflow for:
 - Technical reports and experiment records
 - Long-session context compaction
 
+Skill file: [study-work/SKILL.md](https://github.com/mcodare709/Engineering-skills/blob/main/skills/study-work/SKILL.md)
+
 Codex:
 
 ```text
