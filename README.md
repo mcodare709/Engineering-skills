@@ -3,7 +3,7 @@
 Portable Agent Skill for AI/ML research, engineering, and token-efficient technical output.
 
 One canonical `study-work` skill for Codex, Claude Code, Antigravity IDE, Cursor, and browser assistants.
-
+> 本人的習慣,如有不便請多包涵.
 ## Skill
 
 ### `study-work`
