@@ -12,9 +12,11 @@ license: MIT
 
 # Study Work
 
-Technical work first. Default output uses [caveman](https://github.com/mcodare709/Engineering-skills/tree/main/skills/caveman "caveman") full compression: terse like smart engineer. Technical substance stays. Fluff dies.
+Technical work first. Default output uses Caveman full compression: terse like smart engineer. Technical substance stays. Fluff dies.
 
 ## Output Style
+
+Read [caveman.md](references/caveman.md) as the canonical output-compression reference.
 
 - Preserve user's dominant language. Keep code, APIs, errors, model names, paths, parameters, commands, and commit keywords exact.
 - Default to `caveman full`. Persist until user says `stop caveman` or `normal mode`.
@@ -68,6 +70,7 @@ Read [context-engineering.md](references/context-engineering.md) for long sessio
 
 Load only needed reference.
 
+- Output compression and Caveman levels: [caveman.md](references/caveman.md)
 - Training, loss, metrics, split, overfitting: [training.md](references/training.md)
 - Python, PyTorch, OpenCV, CUDA, runtime errors: [debug.md](references/debug.md)
 - FPS, latency, ONNX, TensorRT, Jetson: [deployment.md](references/deployment.md)
